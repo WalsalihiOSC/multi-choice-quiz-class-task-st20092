@@ -14,12 +14,20 @@ class MultiQuizGUI:
 
         answers = ["Vladivostok", "Astana", "Ulan Bator", "Lhasa"]
         self.a = StringVar()
-        self.a.set('')
+        self.a.set(" ")
 
         for answer in answers:
-            Radiobutton(answersframe, text = answer, value = answer, variable = self.a).grid(sticky = W)
+            Radiobutton(answersframe, text = answer, value = answer, variable = self.a, command = self.checkanswer).grid(sticky = W)
 
+        self.outputlabel = Label(mainframe, text = "Selected Answer")
+        self.outputlabel.grid(row = 3)
             
+    def checkanswer(self):
+        if self.a.get() == "Ulan Bator":
+            self.outputlabel.configure(text = "Correct")
+        else:
+            self.outputlabel.configure(text = "Incorrect")
+
 root = Tk()
 MultiQuizGUI(root)
 root.mainloop()
